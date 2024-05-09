@@ -1,0 +1,38 @@
+/* Estilos para os botões */
+.btn-google,
+.btn-example {
+    background-color: #bd1717;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+/* Mudança de cor ao passar o mouse */
+.btn-google:hover,
+.btn-example:hover {
+    background-color: #665353;
+}
+
+/* Estilos de exemplo */
+header {
+    background-color: #290101;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.footer {
+    background-color: #290101;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    width: 99%;
+}
