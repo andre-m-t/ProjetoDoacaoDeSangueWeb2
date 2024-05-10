@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface ErrStts {
-  txtErr: boolean;
-  nmbrErr: boolean;
-  boolErr: boolean;
-  sxErr: boolean;
-  corErr: boolean;
+  rhErr: boolean;
+  sanguineoErr: boolean;
+  cpfErr: boolean;
+  contatoErr: boolean;
+  nomeErr: boolean;
+  codigoErr: boolean;
 }
 interface PostResponse{
   sttsForms: ErrStts;
