@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO)
 hst = "localhost"
 dB = "doacaoSangue"
 usr = "postgres"
-pwd = "hostpost10"
+pwd = "senhadobanco"
 
 
 
