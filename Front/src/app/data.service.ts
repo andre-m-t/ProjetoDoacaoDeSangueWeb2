@@ -36,6 +36,11 @@ export class DataService {
     const url = 'http://localhost:8000/formulario'; 
     return this.http.post<PostResponse>(url, dado);
   }
+  enviarBusca(dado: any) {
+    const url = 'http://localhost:8000/buscar'; 
+    return this.http.post<PostResponse>(url, dado);
+  }
+
   statusEnvio():Observable<any>{
     return this.http.get("http://localhost:8000/formulario");
   }

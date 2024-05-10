@@ -2,7 +2,10 @@ from typing_extensions import Unpack
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from Model.Classes import Objects
+from Model.Classes import (Doacao, Doador, TipoSanguineo, Rh)
+from DAO import doadorCRUD
+
+
 
 app = FastAPI()
 
@@ -14,6 +17,14 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos os headers
 )
 logging.basicConfig(level=logging.INFO)
+
+
+hst = "localhost"
+dB = "doacaoSangue"
+usr = "postgres"
+pwd = "hostpost10"
+
+
 
 
 @app.get("/")
@@ -38,21 +49,33 @@ def get_texto(id):
      
 
 @app.post("/formulario")
-def receberDadosDoForm(dado: Objects.Doador):
-    print(dado.__str__)
+def receberDadosDoForm(dado: Doador):
+
+    con = doadorCRUD.Conexao(hst,dB,usr,pwd)
+    # tratando erros
     _errs = validarFormulario(dado)
-    print(_errs)
-    if(_errs):
+    for err in _errs:
         # se tiver erro retorno o objeto de erros e paro o processamento por aqui
-        return _errs
+        if err is True:
+            return _errs
     # tudo ok posso tratar os dados a partir daqui
-    print("Sucess")
     
+    con.novo_doador(dado)
+    con.fechar_conexao()
+    
+    return "Sucess"
+
+@app.post("/buscar")
+def receber_busca_do_form(doador: Doador):
+    con = doadorCRUD.Conexao(hst,dB,usr,pwd)
+    todos = con.pesquisar_doador(doador)
+    for i in todos:
+        print(i)
     return "Sucess"
 
 
 
-def validarFormulario(dado: Objects.Doador)-> any:
+def validarFormulario(dado: Doador)-> any:
     # posição de erros
     _errs = []
 
