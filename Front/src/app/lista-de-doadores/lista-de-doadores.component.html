@@ -1,1 +1,29 @@
-<p>lista-de-doadores works!</p>
+<table class="doador-table">
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Contato</th>
+      <th>CPF</th>
+      <th>Tipo Sanguíneo</th>
+      <th>Tipo RH</th>
+      <th>Tipo RH Correto</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let doador of doadores">
+      <td>{{ doador.codigo }}</td>
+      <td>{{ doador.nome }}</td>
+      <td>{{ doador.contato }}</td>
+      <td>{{ doador.cpf }}</td>
+      <td>{{ doador.tipoSanguineo }}</td>
+      <td>{{ doador.tipoRh }}</td>
+      <td>{{ doador.tipoRhCorreto }}</td>
+      <td>
+        <button >Editar</button>
+        <button (click)="inativarDoador(doador)" >Remover</button>
+      </td>
+    </tr>
+  </table>
+  <div class="custom-alert" id="customAlert">
+    <span class="close" (click)="closeAlert()">&times;</span>
+    <p id="mensagem-alerta" ></p>
+</div>

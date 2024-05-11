@@ -73,7 +73,7 @@ class Conexao:
         except Exception as e:
             return "Problema na inserção..."
     # exclusao de doador atravesa da INATIVAÇÃO 
-    def tornar_doador_inativo(self, codigo) -> None:
+    def tornar_doador_inativo(self, codigo) -> bool:
         update_query = "UPDATE Doador SET situacao = %s WHERE codigo = %s"
         values = ("INATIVO", codigo)
         try:
@@ -82,8 +82,10 @@ class Conexao:
             self._db.commit()
             cur.close()
             print("Doador tornou-se INATIVO com sucesso!")
+            return True
         except Exception as e:
             print("Problema ao tornar o doador INATIVO...", e)
+            return False
     # reinserção de doador atravesa da ATIVAÇÃO 
     def tornar_doador_ativo(self, codigo) -> None:
         update_query = "UPDATE Doador SET situacao = %s WHERE codigo = %s"

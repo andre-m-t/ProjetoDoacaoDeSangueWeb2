@@ -1,0 +1,56 @@
+.doador-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .doador-table th, .doador-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .doador-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .doador-table td {
+    text-align: center;
+  }
+  
+  .doador-table button {
+    padding: 5px 10px;
+    background-color: #bd1717;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10%;
+  }
+  
+  .doador-table button:hover {
+    background-color: #665353;
+  }
+  
+  
+.custom-alert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-alert p {
+    margin: 0;
+  }
+  
+  .custom-alert .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+  }

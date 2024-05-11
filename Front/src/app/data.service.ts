@@ -33,9 +33,18 @@ interface Doadores{
   providedIn: 'root'
 })
 export class DataService {
-
+  // variavel para armazenar doadores a partir da busca
+  doadores: Array<Doador> = []
+  // construtor
   constructor(private http: HttpClient) { }
-
+  //métodos
+  setDoadores(doadores:Array<Doador>):void{
+    this.doadores = doadores;
+  }
+  getDoadores():Array<Doador>{
+    return this.doadores;
+  }
+  // funções por rotas 
   getHello(): Observable<any> {
     return this.http.get('http://localhost:8000/');
   }
@@ -45,6 +54,14 @@ export class DataService {
   getRotaTesteComId(id:number):Observable<any>{
     const url =  'http://localhost:8000/teste/'+id;
     return this.http.get(url)
+  }
+  
+  
+  
+  inativarDoador(doador:Doador){
+    const url = 'http://localhost:8000/remover'; 
+    return this.http.post<boolean>(url, doador);
+
   }
   enviarDado(dado: any) {
     const url = 'http://localhost:8000/formulario'; 

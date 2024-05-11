@@ -40,15 +40,23 @@ def rota_teste(valor, quantidade):
 def get_texto(id):
     return f"Rota executou com sucesso recebendo o valor {id}!"
 
-
-
-
-
 @app.get("/")
 def read_root():
   
     return {"Pessoa1": {"Nome": "Andre", "Idade": 30}}
 
+
+
+@app.post("/remover")
+def remover_doador(doador:Doador):
+    # abre conexão
+    con = doadorCRUD.Conexao(hst,dB,usr,pwd)
+    # insere novo doador, funcao retorna mensagem de status do banco
+    stts = con.tornar_doador_inativo(doador.codigo)
+    # fecha conexao
+    con.fechar_conexao()
+
+    return stts
 
      
 
