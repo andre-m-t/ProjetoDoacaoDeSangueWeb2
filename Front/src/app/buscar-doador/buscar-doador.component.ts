@@ -1,7 +1,20 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
-
+// CRIAÇÃO DE INTERFACES
+// INTERFACE PARA RECEBER O OBJETO JSON DE DOADORES DO BACK
+interface Doador{
+  codigo: number;
+  nome: string;
+  contato: string;
+  cpf:string;
+  tipoSanguineo: string;
+  tipoRh: string;
+  tipoRhCorreto: string;
+}
+interface Doadores{
+  Doador : Doador;
+}
 
 // COMPONENT
 
@@ -35,6 +48,11 @@ export class BuscarDoadorComponent {
       tipoRh: this.tipoRh,
       tipoRhCorreto: this.tipoRhCorreto
     };
-    this.dataService.enviarBusca(dadosFormulario).subscribe()
+    this.dataService.enviarBusca(dadosFormulario).subscribe(
+      (response: Doadores) => {
+        console.log(response)
+        
+      }
+    );
   }
 }

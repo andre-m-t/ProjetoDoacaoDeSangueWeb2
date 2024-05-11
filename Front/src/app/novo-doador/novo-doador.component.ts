@@ -12,6 +12,7 @@ interface ErrStts {
   contatoErr: boolean;
   nomeErr: boolean;
   codigoErr: boolean;
+  mensagem:string;
 }
 interface PostResponse {
   sttsForms: ErrStts;
@@ -98,13 +99,21 @@ export class NovoDoadorComponent {
           spanContato.textContent = "";
           spanNome.textContent = "";
           spanCodigo.textContent = "";
-
-          alert("Dados enviados com sucesso!");
+          // alerta personalizado utilizando uma div
+          let mensagemAlerta = document.getElementById("mensagem-alerta") as HTMLParagraphElement;
+          let customAlert = document.getElementById('customAlert') as HTMLSpanElement;
+          mensagemAlerta.textContent = response.sttsForms.mensagem; // Define o texto do alerta personalizado
+          customAlert.style.display = 'block'; // Exibe o alerta personalizado
+          console.log(response)
+          // alert(response.sttsForms.mensagem);
         }
       },
       error => {
-        console.error('Erro ao enviar dados:', error);
+        alert(error);
       });
   }
-
+  closeAlert() {
+    let customAlert = document.getElementById('customAlert') as HTMLSpanElement;
+    customAlert.style.display = 'none';
+  }
 }

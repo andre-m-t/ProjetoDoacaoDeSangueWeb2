@@ -1,5 +1,6 @@
 from datetime import date, time
 from pydantic import BaseModel
+from typing import Optional
 from enum import Enum
 
 # classe referente a doacao 
@@ -13,7 +14,7 @@ class Doacao:
         return f"codigo: {self.codigo}, data: {self.data}, hora: {self.hora}, volume: {self.volume}"
 # classe referente a doador
 class Doador(BaseModel):
-    codigo: int
+    codigo: Optional[int]
     nome: str
     cpf: str
     contato: str

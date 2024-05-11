@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { Observable, BehaviorSubject  } from 'rxjs';
+// CRIAÇÃO DA INTERFACE PARA O OBJETO JSON DE RETORNO DO ENVIO DO FORMS DE NOVO USUARIO
 interface ErrStts {
   rhErr: boolean;
   sanguineoErr: boolean;
@@ -9,9 +9,23 @@ interface ErrStts {
   contatoErr: boolean;
   nomeErr: boolean;
   codigoErr: boolean;
+  mensagem:string;
 }
 interface PostResponse{
   sttsForms: ErrStts;
+}
+// INTERFACE PARA RECEBER O OBJETO JSON DE DOADORES DO BACK
+interface Doador{
+  codigo: number;
+  nome: string;
+  contato: string;
+  cpf:string;
+  tipoSanguineo: string;
+  tipoRh: string;
+  tipoRhCorreto: string;
+}
+interface Doadores{
+  Doador : Doador;
 }
 
 
@@ -38,7 +52,7 @@ export class DataService {
   }
   enviarBusca(dado: any) {
     const url = 'http://localhost:8000/buscar'; 
-    return this.http.post<PostResponse>(url, dado);
+    return this.http.post<Doadores>(url, dado);
   }
 
   statusEnvio():Observable<any>{
