@@ -98,6 +98,21 @@ class Conexao:
             print("Doador tornou-se ATIVO com sucesso!")
         except Exception as e:
             print("Problema ao tornar o doador ATIVO...", e)
+    # update doador
+    def update_doador(self, doador:Doador) -> bool:
+        update_query = "UPDATE Doador SET nome = %s, cpf = %s, contato = %s, tipo_sanguineo = %s, rh = %s, tipo_rh_corretos= %s   WHERE codigo = %s"
+        values = (doador.nome, doador.cpf, doador.contato, doador.tipoSanguineo, doador.tipoRh, doador.tipoRhCorreto, doador.codigo)
+        try:
+            cur = self._db.cursor()
+            cur.execute(update_query, values)
+            self._db.commit()
+            cur.close()
+            print("Update do doador com sucesso!")
+            return True
+        except Exception as e:
+            print("Problema no update do doador", e)
+            return False
+
     # pesquisa doador
     def pesquisar_doador(self, filtro:Doador) -> list[Doador]:
         self._rs = []
@@ -122,6 +137,8 @@ class Conexao:
                 query += "AND rh IN ('POSITIVO', 'NEGATIVO') "+" "  # Buscar todos os tipos de Rh
             else:
                 query += "AND rh LIKE '%"+str(filtro.tipoRh)+"%' "
+        # ordenando por codigo para facilitar
+        query += "ORDER BY codigo"
         # execução da query no banco
         try:
             print(query)

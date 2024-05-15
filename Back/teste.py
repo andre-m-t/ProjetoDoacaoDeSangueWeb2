@@ -40,4 +40,5 @@ if __name__ == "__main__":
         tipoRhCorreto=False
     )
 
-    con.tornar_doador_ativo(4)
+    values = [1, 3, 5, 2, 7]
+    print(values[0])

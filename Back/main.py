@@ -46,6 +46,18 @@ def read_root():
     return {"Pessoa1": {"Nome": "Andre", "Idade": 30}}
 
 
+@app.post("/update")
+def update_doador(doador:Doador):
+    # abre conexão
+    con = doadorCRUD.Conexao(hst,dB,usr,pwd)
+    # update doador, funcao retorna mensagem de status do banco
+    stts = con.update_doador(doador=doador)
+    # fecha conexao
+    con.fechar_conexao()
+    
+    return stts
+
+
 
 @app.post("/remover")
 def remover_doador(doador:Doador):

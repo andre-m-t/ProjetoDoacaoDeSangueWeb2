@@ -58,6 +58,11 @@ export class DataService {
   
   
   
+  updateDoador(doador:Doador){
+    const url = 'http://localhost:8000/update'; 
+    return this.http.post<boolean>(url, doador);
+
+  }
   inativarDoador(doador:Doador){
     const url = 'http://localhost:8000/remover'; 
     return this.http.post<boolean>(url, doador);
