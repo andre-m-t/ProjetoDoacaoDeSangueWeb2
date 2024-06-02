@@ -156,7 +156,7 @@ class Conexao:
             return None
         
 # classe para facilitar a leitura retornada do banco
-class toEntity(BaseModel):
+class toEntity():
     def __init__(self,codigo,nome,cpf,contato,tipo_sanguineo,rh,tipo_rh_corretos,situacao) -> None:
         self.codigo = codigo
         self.nome = nome
