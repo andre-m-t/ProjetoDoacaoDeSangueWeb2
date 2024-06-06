@@ -15,6 +15,14 @@ interface PostResponse{
   sttsForms: ErrStts;
 }
 // INTERFACE PARA RECEBER O OBJETO JSON DE DOADORES DO BACK
+interface Doacao{
+  codigo:number,
+  data: string,
+  hora: string,
+  volume: number,
+  codigo_doador: number
+}
+
 interface Doador{
   codigo: number;
   nome: string;
@@ -35,14 +43,22 @@ interface Doadores{
 export class DataService {
   // variavel para armazenar doadores a partir da busca
   doadores: Array<Doador> = []
+  doacoes: Array<Doacao> = []
   // construtor
   constructor(private http: HttpClient) { }
-  //métodos
+  //métodos doadores
   setDoadores(doadores:Array<Doador>):void{
     this.doadores = doadores;
   }
   getDoadores():Array<Doador>{
     return this.doadores;
+  }
+  //métodos doacoes
+  setDoacoes(doacoes:Array<Doacao>):void{
+    this.doacoes = doacoes;
+  }
+  getDoacoes():Array<Doacao>{
+    return this.doacoes;
   }
   // funções por rotas 
   getHello(): Observable<any> {
@@ -56,8 +72,16 @@ export class DataService {
     return this.http.get(url)
   }
   
-  
-  
+
+  buscarDoacoesDeDoador(doador:Doador){
+    const url = 'http://localhost:8000/busca_doacao_de_doador'; 
+    return this.http.post<boolean>(url, doador);
+  }
+  fazerDoacao(doacao:Doacao){
+    const url = 'http://localhost:8000/doacao'; 
+    return this.http.post<boolean>(url, doacao);
+    
+  }
   updateDoador(doador:Doador){
     const url = 'http://localhost:8000/update'; 
     return this.http.post<boolean>(url, doador);

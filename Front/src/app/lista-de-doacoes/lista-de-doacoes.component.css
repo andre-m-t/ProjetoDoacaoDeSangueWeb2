@@ -1,30 +1,30 @@
-.doador-table {
+.doacao-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.doador-table th, .doador-table td {
+.doacao-table th, .doacao-table td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-.doador-table th {
+.doacao-table th {
     background-color: #f2f2f2;
 }
 
-.doador-table td {
+.doacao-table td {
     text-align: center;
 }
 
 /* Alinhamento dos botões */
-.doador-table .actions {
+.doacao-table .actions {
     display: flex;
     justify-content: center;
     gap: 10px; /* Espaçamento entre os botões */
     padding: 10px;
 }
 
-.doador-table button {
+.doacao-table button {
     padding: 5px 10px;
     background-color: #bd1717;
     color: #fff;
@@ -34,7 +34,7 @@
     /* margin-right: 10%;  Removido para evitar deslocamento excessivo */
 }
 
-.doador-table button:hover {
+.doacao-table button:hover {
     background-color: #665353;
 }
 

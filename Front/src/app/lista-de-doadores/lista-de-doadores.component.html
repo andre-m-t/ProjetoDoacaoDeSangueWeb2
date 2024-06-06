@@ -7,7 +7,8 @@
       <th>Tipo Sanguíneo</th>
       <th>Tipo RH</th>
       <th>Tipo RH Correto</th>
-      <th>Ações</th>
+      <th>Ações para Doador</th>
+      <th>Ações para Doação</th>
     </tr>
     <tr id="{{doador.codigo}}" *ngFor="let doador of doadores">
       <td>{{ doador.codigo }}</td>
@@ -21,12 +22,17 @@
         <button (click)="editarDoador(doador)" >Editar</button>
         <button (click)="inativarDoador(doador)" >Remover</button>
       </td>
+      <td>
+        <button (click)="fazerDoacao(doador)" >Doação</button>
+        <button (click)="verDoacoes(doador)" >Ver Doações</button>
+      </td>
     </tr>
   </table>
   <div class="custom-alert" id="customAlert">
     <span class="close" (click)="closeAlert()">&times;</span>
     <p id="mensagem-alerta" ></p>
   </div>
+  
   <div class="custom-alert" id="alterarAlert">
     <span class="close" (click)="closeAlterarAlert()">&times;</span>
     <form action="/submit" method="post" (submit)="salvarDoador()">
@@ -64,5 +70,19 @@
     
         <button type="submit">Enviar</button>
     </form>
-
+  </div>
+  <div class="custom-alert" id="doacaoAlert">
+    <span class="close" (click)="closeDoacaoAlert()">&times;</span>
+    <form action="/submit" method="post" (submit)="salvarDoacao()">
+      <label for="volume-sangue">Volume de Sangue:</label>
+        <input type="text" id="volume-sangue" name="volume-sangue" [(ngModel)]="volumeSangue" required><br>
+        <br>
+        <label for="data-coleta">Data da Coleta:</label>
+        <input type="date" id="data-coleta" name="data-coleta" [(ngModel)]="dataColeta"  required><br>
+        <br>
+        <label for="hora-coleta">Hora da Coleta:</label>
+        <input type="time" id="hora-coleta" name="hora-coleta" [(ngModel)]="horaColeta" required><br>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
   </div>
