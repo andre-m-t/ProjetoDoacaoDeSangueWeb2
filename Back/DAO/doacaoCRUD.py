@@ -54,6 +54,28 @@ class Conexao:
         except Exception as e:
             print("Problema na pesquisa de doacoes...", e)
             return None
+        
+    # Busca geral
+    def pesquisar_doacoes(self)->list[Doacao]:
+        self._rs = []
+        rs = None
+        query = "SELECT * FROM Doacao WHERE situacao = 'ATIVO' "
+        # ordenando por codigo para facilitar
+        query += "ORDER BY codigo_doador"
+        # execução da query no banco
+        try:
+            cur = self._db.cursor()
+            cur.execute(query)
+            rs = cur.fetchall()
+            cur.close()
+            # tratando dados coletados
+            for row in rs:
+                self._rs.append(toEntity(*row).get_doacao())
+            return self._rs
+        # exceção
+        except Exception as e:
+            print("Problema na pesquisa de doacoes...", e)
+            return None
 
     # faz uma busca do maior codigo
     def buscar_maior_codigo(self)->int:

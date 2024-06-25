@@ -48,45 +48,6 @@ def read_root():
 
 @app.post("/doacao")
 def fazer_doacao(doacao:Doacao):
-    # Abrindo conexao com doadorDAO
-    con = doadorCRUD.Conexao(hst, dB, usr, pwd)
-    # Buscadndo doador para atualizar tiporhcorreto
-    busca = con.buscar_por_codigo(doacao.codigo_doador)[0]
-    # Tipando corretamente para atualizar banco
-    tipoRh = Rh.POSITIVO
-    tipoSanguineo = TipoSanguineo.A
-    # Tipando Rh
-    if busca.rh == "POSITIVO":
-        tipoRh = Rh.POSITIVO
-    elif busca.rh == "NEGATIVO":
-        tipoRh = Rh.NEGATIVO
-    # Tipando o tipo sanguineo
-    if busca.tipo_sanguineo == "A":
-        tipoSanguineo = TipoSanguineo.A
-    elif busca.tipo_sanguineo == "B":
-        tipoSanguineo = TipoSanguineo.B
-    elif busca.tipo_sanguineo == "AB":
-        tipoSanguineo = TipoSanguineo.AB
-    elif busca.tipo_sanguineo == "O":
-        tipoSanguineo = TipoSanguineo.O
-
-    # Criando objeto doador
-    doador = Doador(
-        codigo=busca.codigo,
-        nome=busca.nome,
-        cpf=busca.cpf,
-        contato=busca.contato,
-        tipoSanguineo=tipoSanguineo,
-        tipoRh=tipoRh,
-        tipoRhCorreto=busca.tipo_rh_corretos
-    )
-    # Atualizando para tipo correto
-    doador.tipoRhCorreto = True
-    # Fazendo update no banco
-    con.update_doador(doador)
-    # Fechando conexao com doador
-    con.fechar_conexao()
-
     # # Abrindo conexao com doacaoDAO
     con = doacaoCRUD.Conexao(hst,dB,usr,pwd)
     
@@ -121,6 +82,20 @@ def remover_doador(doador:Doador):
     con.fechar_conexao()
 
     return stts
+
+@app.post("/busca_doacoes")
+def receber_busca_geral():
+    # Abrindo conexao
+    con = doacaoCRUD.Conexao(hst,dB,usr,pwd)
+    # Realizando consulta
+    doacoes = con.pesquisar_doacoes()
+    # transformando em um objeto JSON
+    doacoes_json = []
+    for doacao in doacoes:
+        doacoes_json.append(json.dumps(doacao.__dict__))
+    # retornando objetos para o front em formato JSON 
+    print(doacoes_json)
+    return JSONResponse(content=doacoes_json)
 
 @app.post("/busca_doacao_de_doador")
 def receber_busca_do_form(doador: Doador):

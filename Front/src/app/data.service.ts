@@ -73,6 +73,10 @@ export class DataService {
   }
   
 
+  buscarDoacoes(){
+    const url = 'http://localhost:8000/busca_doacoes'; 
+    return this.http.post<boolean>(url, true);
+  }
   buscarDoacoesDeDoador(doador:Doador){
     const url = 'http://localhost:8000/busca_doacao_de_doador'; 
     return this.http.post<boolean>(url, doador);

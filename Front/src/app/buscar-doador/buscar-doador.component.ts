@@ -49,6 +49,7 @@ export class BuscarDoadorComponent {
       tipoRh: this.tipoRh,
       tipoRhCorreto: this.tipoRhCorreto
     };
+    console.log(dadosFormulario);
     this.dataService.enviarBusca(dadosFormulario).subscribe(
       (response: Doadores) => {
         // criando array do tipo doador para armazenar no dataservice

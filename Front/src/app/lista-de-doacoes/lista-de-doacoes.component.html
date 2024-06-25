@@ -1,17 +1,38 @@
 <table class="doacao-table">
-  
-  <tr>
-      <th>Código</th>
-      <th>Data</th>
-      <th>Hora</th>
-      <th>Doador</th>
-      <th>Volume de Sangue(ml)</th>
-  </tr>
-  <tr id="{{doacao.codigo}}" *ngFor="let doacao of doacoes">
-    <td>{{doacao.codigo}}</td>
-    <td>{{doacao.data}}</td>
-    <td>{{doacao.hora}}</td>
-    <td>{{doacao.codigo_doador}}</td>
-    <td>{{doacao.volume}}</td>
-  </tr>
+  <ng-container *ngFor="let doacao of doacoes">
+    
+    <div id="{{doador.codigo}}" *ngFor="let doador of doadores">
+
+      <ng-container *ngIf="doacao.codigo_doador === doador.codigo">
+
+        <tr class="doador-header">
+          <th>Nome</th>
+          <th>Tipo Sanguineo</th>
+        </tr>
+        <tr class="doador-info">
+          <td>{{doador.nome}}</td>
+          <td>{{doador.tipoSanguineo}}</td>
+        </tr>
+        <tr>
+            <th>Código</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Doador</th>
+            <th>Volume de Sangue(ml)</th>
+        </tr>
+        <ng-container *ngFor="let doacao of doacoes">
+          <tr *ngIf="doacao.codigo_doador === doador.codigo">
+            <td>{{doacao.codigo}}</td>
+            <td>{{doacao.data}}</td>
+            <td>{{doacao.hora}}</td>
+            <td>{{doacao.codigo_doador}}</td>
+            <td>{{doacao.volume}}</td>
+          </tr>
+        </ng-container>
+
+      </ng-container>
+      
+    </div>
+
+  </ng-container>
   </table>

@@ -11,6 +11,16 @@ interface Doacao{
   volume:number;
   codigo_doador: number;
 }
+interface Doador{
+  codigo: number;
+  nome: string;
+  contato: string;
+  cpf:string;
+  tipoSanguineo: string;
+  tipoRh: string;
+  tipoRhCorreto: string;
+}
+
 
 @Component({
   selector: 'app-lista-de-doacoes',
@@ -22,12 +32,15 @@ interface Doacao{
 export class ListaDeDoacoesComponent {
   // Array
   doacoes:Array<Doacao> = []
+  doadores:Array<Doador> = []
   
   // Construtor da page
   constructor(private dataService: DataService, private router: Router) { }
   // Ao iniciar a page
   ngOnInit(): void {
-    this.doacoes = this.dataService.getDoacoes()
-    console.log(this.doacoes)
+    this.doacoes = this.dataService.getDoacoes();
+    this.doadores = this.dataService.getDoadores();
+    console.log(this.doacoes);
+    console.log(this.doadores)
   }
 }
