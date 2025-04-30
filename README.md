@@ -1,7 +1,7 @@
 <h1>Sistema Para Doação de Sangue</h1>
 <h3>Desenvolvido durante a disciplina de Programação Web 2 utilizando as seguintes tecnologias</h3>
 <ol>
-  <li>Angular</li>
+  <li>Angular 17.2.3.</li>
   <ul>
     <li>Para o desenvolvimento do Frontend do projeto</li>
   </ul>
